@@ -1,40 +1,41 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Grammar {
-private int id;
-private int id2;
+    private int id;
+    private ArrayList<String> words;
 
 
-    public void list() {
-
+    public Grammar(int id, ArrayList words) {
+        this.id = id;
+        this.words = words;
     }
 
-    public void print() {
-
+    public ArrayList<String> getWords() {
+        return words;
     }
 
-    public void save() {
-
+    public int getId() {
+        return id;
     }
 
-    public void addRule() {
-
+    public void addRule(String rule) {
+        words.add(rule);
     }
 
-    public void removeRule() {
-
+    public void removeRule(int n) {
+        words.remove(n);
     }
 
-    public void union() {
-
+    public boolean empty() {
+        return words.isEmpty();
     }
 
-    public void concat() {
-
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ": words=" + words.toString();
     }
-
-    public void empty() {
-
-    }
-
 }
