@@ -40,9 +40,10 @@ public class Main {
 
         int choice = -1;
         while (choice != 0) {
-            System.out.println("Please select a method. To exit enter 0");
 
-            String[] methods = {"ID List", "Print Grammar", "Save in file", "Add Rule", "Remove Rule", "Union", "Concat", "Empty", "Chomsky", "Chomskify", "Cyk"};
+            System.out.println("\n"+"Please select a method. To exit enter 0");
+
+            String[] methods = {"ID List", "Print Grammar", "Save in file", "Add Rule", "Remove Rule", "Union", "Concat", "Empty", "Chomsky", "Chomskify", "Cyk", "Kleene operation"};
             for (int i = 0; i < methods.length; i++) {
                 System.out.println(i+1 + ": " + methods[i]);
             }
@@ -50,18 +51,28 @@ public class Main {
             choice = parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                {
                     System.out.println("List of IDs for grammars");
                     for (int id : worker.list()) {
                         System.out.println(id);
                     }
+                }
                     break;
                 case 2:
+                {
                     ShowGrammarMenu(worker);
+                }
                     break;
                 case 3:
-                    //worker.save();
+                {
+                    ShowGrammarMenu(worker);
+                    int id = parseInt(scanner.nextLine());
+                    String filename = scanner.nextLine();
+                    worker.save(id,filename);
+                }
                     break;
-                case 4: {
+                case 4:
+                {
                     ShowGrammarMenu(worker);
                     int id = parseInt(scanner.nextLine());
                     System.out.println("Please enter new rule");
@@ -69,7 +80,8 @@ public class Main {
                     worker.addRule(id, rule);
                 }
                     break;
-                case 5: {
+                case 5:
+                {
                     ShowGrammarMenu(worker);
                     int id = parseInt(scanner.nextLine());
                     System.out.println("Please enter index of rule to remove");
@@ -107,17 +119,33 @@ public class Main {
                     break;
                 case 9:
                 {
-                    // chomsky;
+                    ShowGrammarMenu(worker);
+                    System.out.println("Please enter id to check if in Chomsky norm");
+                    int id = parseInt(scanner.nextLine());
+                    //worker.chomsky(id);
                 }
                 break;
                 case 10:
                 {
-                  //chomskify;
+                    ShowGrammarMenu(worker);
+                    System.out.println("Please enter id to convert grammar in Chomsky norm");
+                    int id = parseInt(scanner.nextLine());
+                    //worker.chomskify(id);
                 }
                 break;
                 case 11:
                 {
-                    //    cyk;
+                    ShowGrammarMenu(worker);
+                    System.out.println("Please enter id to check if in CYK norm");
+                    int id = parseInt(scanner.nextLine());
+                    //worker.cyk(id);
+                }
+                case 12:
+                {
+                    ShowGrammarMenu(worker);
+                    System.out.println("Please enter id to make Kleene operation");
+                    int id = parseInt(scanner.nextLine());
+                    // worker.iter(id);
                 }
                 break;
             }

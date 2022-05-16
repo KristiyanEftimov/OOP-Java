@@ -13,6 +13,8 @@ public class Grammar {
         this.words = words;
     }
 
+
+
     public ArrayList<String> getWords() {
         return words;
     }

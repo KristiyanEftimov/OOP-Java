@@ -1,8 +1,6 @@
 package com.company;
 
-import java.io.Console;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -28,9 +26,13 @@ public class GrammarWorker {
         System.out.println(grammars.get(id));
     }
 
-    public void save(int id, String filename) {
+    public void save(int id, String filename)  {
         try {
-            File myObj = new File("filename.txt");
+            grammars.get(id);
+            FileWriter fileWriter = new FileWriter(filename);
+            fileWriter.write(String.valueOf(grammars.get(id)));
+            fileWriter.close();
+            File myObj = new File(filename);
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
             } else {
@@ -78,6 +80,22 @@ public class GrammarWorker {
 
     public boolean empty(int id) {
         return grammars.get(id).empty();
+    }
+
+    public void chomsky(int id) {
+        grammars.get(id);
+    }
+
+    public void chomskify(int id) {
+        grammars.get(id);
+    }
+
+    public void cyk(int id) {
+        grammars.get(id);
+    }
+
+    public void iter(int id) {
+        grammars.get(id);
     }
 
 }
