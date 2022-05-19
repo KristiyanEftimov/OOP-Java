@@ -1,5 +1,10 @@
 package com.company;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,7 +12,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, BadLocationException {
         System.out.println("Please enter amount of grammars");
 
         int grammarAmount = 0;
@@ -36,6 +41,17 @@ public class Main {
 
         GrammarWorker worker = new GrammarWorker(grammars);
 
+        XMLEncoder e = new XMLEncoder(
+                new BufferedOutputStream(
+                        new FileOutputStream("file.xml")));
+        e.writeObject(String.valueOf(grammars));
+        e.close();
+
+        XMLDecoder d = new XMLDecoder(
+                new BufferedInputStream(
+                        new FileInputStream("file.xml")));
+        Object result = d.readObject();
+        d.close();
 
 
         int choice = -1;
@@ -43,7 +59,8 @@ public class Main {
 
             System.out.println("\n"+"Please select a method. To exit enter 0");
 
-            String[] methods = {"ID List", "Print Grammar", "Save in file", "Add Rule", "Remove Rule", "Union", "Concat", "Empty", "Chomsky", "Chomskify", "Cyk", "Kleene operation"};
+            String[] methods = {"ID List", "Print Grammar", "Save in file", "Add Rule", "Remove Rule", "Union", "Concat", "Empty", "Chomsky", "Chomskify",
+                    "Cyk", "Kleene operation", "Open", "Close", "Save", "Save as", "Help", "Exit"};
             for (int i = 0; i < methods.length; i++) {
                 System.out.println(i+1 + ": " + methods[i]);
             }
@@ -145,7 +162,37 @@ public class Main {
                     ShowGrammarMenu(worker);
                     System.out.println("Please enter id to make Kleene operation");
                     int id = parseInt(scanner.nextLine());
-                    // worker.iter(id);
+                    //worker.iter(id);
+                }
+                case 13:
+                {
+                    //if(choice == 13)
+                    //open();
+                }
+                case 14:
+                {
+                  //  if(choice == 14)
+                   // close("");
+                }
+                case 15:
+                {
+                    //if(choice == 15)
+                   // save("Test.xml");
+                }
+                case 16:
+                {
+                   // if(choice == 16)
+                   //saveas("newTest.xml");
+                }
+                case 17:
+                {
+                    if(choice == 17)
+                   help();
+                }
+                case 18:
+                {
+                    if(choice == 18){
+                    exit();}
                 }
                 break;
             }
@@ -153,6 +200,69 @@ public class Main {
 
 
     }
+
+
+
+/*
+ public static void open(String filename) throws IOException {
+        File file = new File("Test.xml");
+        if(file.exists()){
+            FileInputStream fileOpen = new FileInputStream(file);
+            if(fileOpen.available() !=0){
+                XMLDecoder decoder = new XMLDecoder(fileOpen);
+                file = (grammar) decoder.readObject();
+                decoder.close();
+                fileOpen.close();
+            }
+            System.out.println("Sucessfully opened" + file.getName());
+        }
+        else{
+            boolean newFile = file.createNewFile();
+            System.out.println("Sucessfully created" + file.getName());
+        }
+    }
+
+
+    public static void close(String filename) throws IOException {
+        File myObj = new File(filename);
+
+        //filename == null;
+
+        System.out.println("Sucessfully closed" + filename);
+    }
+
+    public static void save(String filename) throws IOException{
+        FileOutputStream file = new FileOutputStream(filename);
+        XMLEncoder encoder =new XMLEncoder(file);
+        encoder.writeObject(file);
+        encoder.close();
+        file.close();
+        System.out.println("Sucessfully saved " + filename);
+    }
+
+    public static void saveas(String filename) throws IOException{
+    FileOutputStream file = new FileOutputStream(filename);
+    XMLEncoder encoder =new XMLEncoder(file);
+    encoder.writeObject(file);
+    encoder.close();
+    file.close();
+    System.out.println("Sucessfully saved" + filename);
+}
+*/
+    public static void help(){
+        System.out.println("The following commands are supported:");
+        System.out.println("open <file> opens <file> " );
+        System.out.println("close closes currently opened file");
+        System.out.println("saveas <file> saves the currently open file in <file>");
+        System.out.println("help prints this information");
+        System.out.println("exit  exists the program");
+    }
+
+    public static void exit(){
+        System.out.println("Exiting the program");
+        System.exit(0);
+    }
+
 
     public static void ShowGrammarMenu(GrammarWorker worker) {
         System.out.println("Please select a grammar");

@@ -22,11 +22,7 @@ public class GrammarWorker {
         return ids;
     }
 
-    public void print(int id) {
-        System.out.println(grammars.get(id));
-    }
-
-    public void save(int id, String filename)  {
+    public void save(int id, String filename)  throws IOException  {
         try {
             grammars.get(id);
             FileWriter fileWriter = new FileWriter(filename);
@@ -35,7 +31,7 @@ public class GrammarWorker {
             File myObj = new File(filename);
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
-            } else {
+            } else  {
                 System.out.println("File already exists.");
             }
         } catch (IOException e) {
@@ -50,6 +46,10 @@ public class GrammarWorker {
 
     public void removeRule(int id, int ruleIndex) {
         grammars.get(id).removeRule(ruleIndex);
+    }
+
+    public boolean empty(int id) {
+        return grammars.get(id).empty();
     }
 
     public int union(int id1, int id2) {
@@ -78,24 +78,22 @@ public class GrammarWorker {
         return id;
     }
 
-    public boolean empty(int id) {
-        return grammars.get(id).empty();
-    }
-
     public void chomsky(int id) {
-        grammars.get(id);
+
     }
 
     public void chomskify(int id) {
-        grammars.get(id);
+
     }
 
     public void cyk(int id) {
-        grammars.get(id);
+
     }
 
     public void iter(int id) {
-        grammars.get(id);
+
+        // gramatika [a , b]
+        // " ",a,b,ab,aa,bb
     }
 
 }
