@@ -1,6 +1,7 @@
-package com.company;
+package Classes;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -9,20 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Console {
-    public static void main(String[] args)
-    {
-        new Console();
-    }
-
+    
     public JFrame frame;
     public JTextPane console;
     public JTextField input;
     public JScrollPane scrollPane;
-
     public StyledDocument document;
     boolean trace = false;
 
@@ -49,7 +44,7 @@ public class Console {
 
         input = new JTextField();
         input.setEditable(true);
-        console.setFont(new Font("Courier New",Font.PLAIN,12));
+        console.setFont(new Font("Courier New",Font.PLAIN,15));
         input.setForeground(Color.WHITE);
         input.setCaretColor(Color.WHITE);
         input.setOpaque(false);
@@ -60,11 +55,9 @@ public class Console {
                 String text = input.getText();
                 if(text.length() >=1){
                     recent_used.add(text);
-                    recent_used_id=0;
                     doCommand(text);
-                    scrollBottom();
-                    input.selectAll();
 
+                    input.selectAll();
                 }
             }
         });
@@ -72,32 +65,12 @@ public class Console {
         input.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_UP)
-                {
-                    if (recent_used_id < (recent_used_maximum - 1) && recent_used_id < (recent_used.size() -1))
-                    {
-                        recent_used_id++;
-                    }
-                    input.setText(recent_used.get(recent_used.size() - 1 - recent_used_id ));
-                }
-                else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-                {
-                    if (recent_used_id > 0)
-                    {
-                        recent_used_id--;
-                    }
-                    input.setText(recent_used.get(recent_used.size() - 1 - recent_used_id ));
-                }
             }
-
             @Override
             public void keyPressed(KeyEvent e) {
-
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
-
             }
         });
 
@@ -125,9 +98,6 @@ public class Console {
         console.setCaretPosition(console.getDocument().getLength());
     }
 
-    public void print(String s,boolean trace){
-        print(s,trace,new Color(255,255,255));
-    }
 
     public void print(String s,boolean trace,Color c){
         Style style = console.addStyle("Style",null);
@@ -145,8 +115,22 @@ public class Console {
         } catch (Exception ex){}
     }
 
-    public void println(String s,boolean trace){
-        println(s,trace,new Color(255,255,255));
+    public void print(String text) throws BadLocationException {
+        Style style=console.addStyle("Style",null);
+        StyleConstants.setForeground(style,Color.white);
+        document.insertString(document.getLength(),text+"\n",style);
+    }
+
+    public void printid(int id) throws BadLocationException {
+        Style style=console.addStyle("Style",null);
+        StyleConstants.setForeground(style,Color.white);
+        document.insertString(document.getLength(),id+"\n",style);
+    }
+
+    public void printboolean(boolean id) throws BadLocationException {
+        Style style=console.addStyle("Style",null);
+        StyleConstants.setForeground(style,Color.white);
+        document.insertString(document.getLength(),id+"\n",style);
     }
 
     public void println(String s,boolean trace,Color c){
