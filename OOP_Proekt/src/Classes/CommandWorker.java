@@ -15,11 +15,11 @@ public class CommandWorker {
         ArrayList<Grammar> grammars = new ArrayList<>();
         GrammarWorker worker = new GrammarWorker(grammars);
         int choice = -1;
-        while (choice != 19) {
-            System.out.println("\n" + "Please select a method. To exit enter 19");
+        while (choice != 16) {
+            System.out.println("\n" + "Please select a method. To exit enter 16");
 
             String[] methods = {"Add Grammar", "ID List", "Print Grammar", "Save Grammar in file", "Add Rule", "Remove Rule", "Union", "Concat", "Empty",
-                    "Chomsky", "Chomskify", "Cyk", "Kleene operation", "Open", "Close", "Save", "Save as", "Help", "Exit"};
+                    "Kleene operation", "Open", "Close", "Save", "Save as", "Help", "Exit"};
             for (int i = 0; i < methods.length; i++) {
                 System.out.println(i + 1 + ": " + methods[i]);
             }
@@ -27,7 +27,7 @@ public class CommandWorker {
             choice = parseInt(scanner.nextLine());
             switch (choice) {
                 case 1: {
-                    if (fileName != null){
+                    if (fileName != null) {
                     worker.addGrammar();
                     }
                     else {
@@ -138,27 +138,6 @@ public class CommandWorker {
                 }
                 break;
                 case 10: {
-                    //ShowGrammarMenu(worker);
-                    //System.out.println("Please enter id to check if in Chomsky norm");
-                    //int id = parseInt(scanner.nextLine());
-                    //worker.chomsky(id);
-                }
-                break;
-                case 11: {
-                    //ShowGrammarMenu(worker);
-                    //System.out.println("Please enter id to convert grammar in Chomsky norm");
-                    //int id = parseInt(scanner.nextLine());
-                    //worker.chomskify(id);
-                }
-                break;
-                case 12: {
-                    //ShowGrammarMenu(worker);
-                    //System.out.println("Please enter id to check if in CYK norm");
-                    //int id = parseInt(scanner.nextLine());
-                    //worker.cyk(id);
-                }
-                break;
-                case 13: {
                     if(fileName != null) {
                     ShowGrammarMenu(worker);
                     System.out.println("Please enter id to make Kleene operation");
@@ -172,11 +151,14 @@ public class CommandWorker {
                     }
                 }
                 break;
-                case 14: {
-
+                case 11: {
+                    if (fileName == null) {
+                        grammars = worker.open(fileName);
+                    } else
+                        System.out.println("You have opened a file");
                 }
                 break;
-                case 15: {
+                case 12: {
                     if (fileName != null ) {
                         worker.close(fileName);
                         fileName=null;
@@ -186,7 +168,7 @@ public class CommandWorker {
                         System.out.println("You must first open a file!");
                 }
                 break;
-                case 16: {
+                case 13: {
                     if (fileName != null) {
                         System.out.println("Enter filename to save ");
                         String filename = scanner.nextLine();
@@ -196,7 +178,7 @@ public class CommandWorker {
                     }
                 }
                 break;
-                case 17: {
+                case 14: {
                     if (fileName != null) {
                     System.out.println("Please enter file directory: ");
                     String filename = scanner.nextLine();
@@ -207,11 +189,11 @@ public class CommandWorker {
                     }
                 }
                 break;
-                case 18: {
+                case 15: {
                     worker.help();
                 }
                 break;
-                case 19: {
+                case 16: {
                     worker.exit();
                 }
                 break;

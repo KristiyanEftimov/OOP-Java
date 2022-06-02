@@ -54,7 +54,6 @@ public class GrammarWorker {
             FileWriter fileWriter = new FileWriter(filename);
             fileWriter.write(String.valueOf(grammars.get(id)));
             fileWriter.close();
-            File myObj = new File(filename);
             System.out.println("Grammar saved in " + filename);
     }
 
@@ -96,18 +95,6 @@ public class GrammarWorker {
         return id;
     }
 
-    public void chomsky(int id) {
-
-    }
-
-    public void chomskify(int id) {
-
-    }
-
-    public void cyk(int id) {
-
-    }
-
     public int iter(int id) {
         ArrayList<String> words = new ArrayList<String>();
         ArrayList<String> originalWords = grammars.get(id).getWords();
@@ -126,13 +113,13 @@ public class GrammarWorker {
         return grammars.size() - 1;
     }
 
-    public Grammar open( String fileName) throws IOException {
+    public Grammar open(String fileName) throws IOException {
         ArrayList<Grammar> grammarOpen = new ArrayList<>();
         Grammar grammar = new Grammar();
         File file = new File(fileName);
         if(file.exists()) {
             FileInputStream fileOpen = new FileInputStream(fileName);
-            if(fileOpen.available() != 0){
+            if(fileOpen.available() != 0) {
                 XMLDecoder decoder = new XMLDecoder(fileOpen);
                 grammarOpen.add((Grammar) decoder.readObject());
                 decoder.close();
@@ -142,7 +129,9 @@ public class GrammarWorker {
         }
         else {
             boolean newFile = file.createNewFile();
+            if(newFile){
             System.out.println("Successfully created " + fileName);
+            }
         }
         return grammar;
     }
@@ -169,16 +158,28 @@ public class GrammarWorker {
         System.out.println("Successfully saved " + filename);
   }
 
-    public void help(){
+    public void help() {
         System.out.println("The following commands are supported:");
-        System.out.println("open <file> opens <file> " );
-        System.out.println("close closes currently opened file");
-        System.out.println("saveas <file> saves the currently open file in <file>");
+        System.out.println("open <file> opens <file>");
+        System.out.println("close  closes currently opened file");
+        System.out.println("save  saves the currently open file");
+        System.out.println("saveas <file>  saves the currently open file in <file>");
         System.out.println("help prints this information");
-        System.out.println("exit  exists the program");
+        System.out.println("list    List of all grammar ids");
+        System.out.println("print <id>  Prints grammars in appropriate format");
+        System.out.println("saveGrammar <id> <filename>  saves chosen grammar in a file");
+        System.out.println("addRule <id> <rule>  adds rule to a grammar");
+        System.out.println("removeRule <id> <n>  remove rule from a grammar");
+        System.out.println("union <id1> <id2>  unions two grammars and creates new one with new id");
+        System.out.println("concat <id1> <id2>  concat two grammars and creates new one with new id");
+        System.out.println("chomsky <id>  checks if grammar is in chomsky form");
+        System.out.println("chomskify <id>  transforms normal grammar to chomsky form");
+        System.out.println("cyk <id>  checks if in CYK form");
+        System.out.println("iter <id>  operation Kleene star from a grammar and creates new one with new id");
+        System.out.println("empty <id>  checks if language in the grammar is empty");
     }
 
-    public void exit(){
+    public void exit() {
         System.out.println("Exiting the program");
         System.exit(0);
     }

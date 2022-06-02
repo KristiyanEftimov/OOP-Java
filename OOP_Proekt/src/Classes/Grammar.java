@@ -2,8 +2,9 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
-public class Grammar {
+public class Grammar extends ArrayList<Grammar> {
     private int id;
     private ArrayList<String> words;
 
