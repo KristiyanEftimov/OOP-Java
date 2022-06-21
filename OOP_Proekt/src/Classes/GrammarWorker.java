@@ -114,15 +114,15 @@ public class GrammarWorker {
     }
 
     public Grammar open(String fileName) throws IOException {
-        ArrayList<Grammar> grammarOpen = new ArrayList<>();
         Grammar grammar = new Grammar();
         File file = new File(fileName);
         if(file.exists()) {
             FileInputStream fileOpen = new FileInputStream(fileName);
             if(fileOpen.available() != 0) {
-                XMLDecoder decoder = new XMLDecoder(fileOpen);
-                grammarOpen.add((Grammar) decoder.readObject());
-                decoder.close();
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String st;
+                while ((st = br.readLine()) != null)
+                    System.out.println(st);
                 fileOpen.close();
             }
             System.out.println("Successfully opened " + fileName);
@@ -172,9 +172,6 @@ public class GrammarWorker {
         System.out.println("removeRule <id> <n>  remove rule from a grammar");
         System.out.println("union <id1> <id2>  unions two grammars and creates new one with new id");
         System.out.println("concat <id1> <id2>  concat two grammars and creates new one with new id");
-        System.out.println("chomsky <id>  checks if grammar is in chomsky form");
-        System.out.println("chomskify <id>  transforms normal grammar to chomsky form");
-        System.out.println("cyk <id>  checks if in CYK form");
         System.out.println("iter <id>  operation Kleene star from a grammar and creates new one with new id");
         System.out.println("empty <id>  checks if language in the grammar is empty");
     }

@@ -1,6 +1,5 @@
 package Classes;
 
-import javax.swing.text.BadLocationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -153,9 +152,14 @@ public class CommandWorker {
                 break;
                 case 11: {
                     if (fileName == null) {
-                        grammars = worker.open(fileName);
-                    } else
+                        System.out.println("Enter filename to open");
+                        String fileName = scanner.nextLine();
+                        worker.open(fileName);
+                        this.fileName = fileName;
+                    }
+                    else {
                         System.out.println("You have opened a file");
+                    }
                 }
                 break;
                 case 12: {
@@ -164,8 +168,9 @@ public class CommandWorker {
                         fileName=null;
                         grammars=null;
                     }
-                    else
+                    else {
                         System.out.println("You must first open a file!");
+                        }
                 }
                 break;
                 case 13: {
