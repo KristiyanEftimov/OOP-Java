@@ -21,25 +21,19 @@ public class GrammarWorker {
 
     public void addGrammar() {
         System.out.println("Please enter amount of grammars");
-        int grammarAmount = 0;
+        int grammarAmount;
         Scanner scanner = new Scanner(System.in);
+        grammarAmount = parseInt(scanner.nextLine());
         try {
-            while(grammarAmount == 0) {
-                grammarAmount = parseInt(scanner.nextLine());
-            }
-        } catch (Exception e){
-            System.out.println("Incorrect input " + e.getMessage());
-        }
-        while (grammars.size() < grammarAmount) {
-            try {
+            for (int i = 0; i < grammarAmount; i++) {
                 String input = scanner.nextLine();
                 if (!input.isEmpty()) {
                     String[] words = input.split(" ");
                     grammars.add(new Grammar(grammars.size(), new ArrayList<>(Arrays.asList(words))));
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
