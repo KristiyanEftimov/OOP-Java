@@ -2,17 +2,13 @@ package Classes;
 
 import java.util.ArrayList;
 
-public class Grammar extends ArrayList<Grammar> {
+public class Grammar {
     private int id;
     private ArrayList<String> words;
 
     public Grammar(int id, ArrayList words) {
         this.id = id;
         this.words = words;
-    }
-
-    public Grammar() {
-
     }
 
     public ArrayList<String> getWords() {

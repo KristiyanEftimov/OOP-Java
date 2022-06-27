@@ -13,7 +13,9 @@ public class CommandWorker {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Grammar> grammars = new ArrayList<>();
         GrammarWorker worker = new GrammarWorker(grammars);
-        int choice = -1;
+        FileOperations operations = new FileOperations(grammars);
+
+        int choice = 0;
         while (choice != 16) {
             System.out.println("\n" + "Please select a method. To exit enter 16");
 
@@ -154,7 +156,7 @@ public class CommandWorker {
                     if (fileName == null) {
                         System.out.println("Enter filename to open");
                         String fileName = scanner.nextLine();
-                        worker.open(fileName);
+                        operations.open(fileName);
                         this.fileName = fileName;
                     }
                     else {
@@ -164,9 +166,8 @@ public class CommandWorker {
                 break;
                 case 12: {
                     if (fileName != null ) {
-                        worker.close(fileName);
+                        operations.close(fileName);
                         fileName=null;
-                        grammars=null;
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -177,7 +178,7 @@ public class CommandWorker {
                     if (fileName != null) {
                         System.out.println("Enter filename to save ");
                         String filename = scanner.nextLine();
-                        worker.save(filename);
+                        operations.save(filename);
                     } else {
                         System.out.println("You must first open a file!");
                     }
@@ -187,7 +188,7 @@ public class CommandWorker {
                     if (fileName != null) {
                     System.out.println("Please enter file directory: ");
                     String filename = scanner.nextLine();
-                    worker.saveas(filename);
+                    operations.saveas(filename);
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -195,11 +196,11 @@ public class CommandWorker {
                 }
                 break;
                 case 15: {
-                    worker.help();
+                    operations.help();
                 }
                 break;
                 case 16: {
-                    worker.exit();
+                    operations.exit();
                 }
                 break;
             }
