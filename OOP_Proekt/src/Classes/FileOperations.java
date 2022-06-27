@@ -34,6 +34,15 @@ public class FileOperations extends GrammarWorker {
         System.out.println("Successfully closed " + fileName);
     }
 
+    public void saveGrammar(int id, String filename) throws IOException {
+        FileOutputStream file = new FileOutputStream(filename);
+        XMLEncoder encoder = new XMLEncoder(file);
+        encoder.writeObject(String.valueOf(getGrammars().get(id)));
+        encoder.close();
+        file.close();
+        System.out.println("Grammar saved in " + filename);
+    }
+
     public void save(String filename) throws IOException {
         FileOutputStream file = new FileOutputStream(filename);
         XMLEncoder encoder = new XMLEncoder(file);

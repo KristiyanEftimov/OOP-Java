@@ -14,6 +14,8 @@ public class CommandWorker {
         ArrayList<Grammar> grammars = new ArrayList<>();
         GrammarWorker worker = new GrammarWorker(grammars);
         FileOperations operations = new FileOperations(grammars);
+        Rules rules = new Rules(grammars);
+        LogicalOperations logicalOperations = new LogicalOperations(grammars);
 
         int choice = 0;
         while (choice != 16) {
@@ -65,7 +67,7 @@ public class CommandWorker {
                         int id = parseInt(scanner.nextLine());
                         System.out.println("Enter filename to save");
                         String filename = scanner.nextLine();
-                        worker.saveGrammar(id, filename);
+                        operations.saveGrammar(id, filename);
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -78,7 +80,7 @@ public class CommandWorker {
                     int id = parseInt(scanner.nextLine());
                     System.out.println("Please enter new rule");
                     String rule = scanner.nextLine();
-                    worker.addRule(id, rule);
+                    rules.addRule(id, rule);
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -91,7 +93,7 @@ public class CommandWorker {
                         int id = parseInt(scanner.nextLine());
                         System.out.println("Please enter index of rule to remove");
                         int index = parseInt(scanner.nextLine());
-                        worker.removeRule(id, index);
+                        rules.removeRule(id, index);
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -105,7 +107,7 @@ public class CommandWorker {
                     int id1 = parseInt(scanner.nextLine());
                     System.out.println("Please enter IDs to union");
                     int id2 = parseInt(scanner.nextLine());
-                    worker.union(id1, id2);
+                    logicalOperations.union(id1, id2);
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -119,7 +121,7 @@ public class CommandWorker {
                     int id1 = parseInt(scanner.nextLine());
                     System.out.println("Please enter IDs to concat");
                     int id2 = parseInt(scanner.nextLine());
-                    worker.concat(id1, id2);
+                    logicalOperations.concat(id1, id2);
                     }
                     else {
                         System.out.println("You must first open a file!");
@@ -143,7 +145,7 @@ public class CommandWorker {
                     ShowGrammarMenu(worker);
                     System.out.println("Please enter id to make Kleene operation");
                     int id = parseInt(scanner.nextLine());
-                    int index = worker.iter(id);
+                    int index = logicalOperations.iter(id);
                     System.out.println(index);
                     System.out.println(grammars.get(index).toString());
                     }
